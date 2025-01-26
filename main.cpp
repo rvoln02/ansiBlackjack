@@ -229,8 +229,6 @@ void displayTable(int selectedButton, const std::vector<Card>& dealerCards, cons
     std::cout << "\033[" << rows - buttonHeight + 2 << ";5H" << buttonBackground << yellowText << "BET: $" << bet << reset;
 }
 
-
-
 // helper to handle dealer autoplay
 int handleDealerTurn(std::vector<Card>& dealerCards, int dealerRow, int selectedButton, const std::vector<Card>& playerCards, double balance, double bet, int cols) {
     std::pair<int, int> dealerHandPair = calculateHandValue(dealerCards);
@@ -248,7 +246,6 @@ int handleDealerTurn(std::vector<Card>& dealerCards, int dealerRow, int selected
     }
     return dealerHandValue;
 }
-
 
 void determineOutcome(int dealerHandValue, int playerHandValue, double& balance, double bet) {
     if (dealerHandValue <= 21) {
