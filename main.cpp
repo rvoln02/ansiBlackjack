@@ -256,24 +256,12 @@ void determineOutcome(int dealerHandValue, int playerHandValue, double& balance,
         } else if (dealerHandValue > playerHandValue) {
             std::cout << "\033[31mDealer wins.\033[0m" << std::flush;
         } else {
-            
-            if (playerHandValue == 21) { 
-                std::cout << "\033[32mBLACKJACK! You win!!!\033[0m" << std::flush;
-                balance += roundToTwoDecimals(bet * 1.5);
-            } else {
-                std::cout << "\033[32mYou win!!!\033[0m" << std::flush;
-                balance += roundToTwoDecimals(bet * 2);
-            }
-        }
-    } else {
-        std::cout << "\nDealer busts.\n" << std::flush;
-        if (playerHandValue == 21) { 
-            std::cout << "\033[32mBLACKJACK! You win!!!\033[0m" << std::flush;
-            balance += roundToTwoDecimals(bet * 1.5);
-        } else {
             std::cout << "\033[32mYou win!!!\033[0m" << std::flush;
             balance += roundToTwoDecimals(bet * 2);
         }
+    } else {
+        std::cout << "\033[32mYou win!!!\033[0m" << std::flush;
+        balance += roundToTwoDecimals(bet * 2);
     }
     sleep(2);
 }
@@ -337,7 +325,7 @@ int main() {
         while (true) {
             std::cout << "\033[32m===============================\033[0m\n" << std::flush;
             std::cout << "Current Balance: $\033[33m" << balance << "\033[0m\n";
-            std::cout << "Enter your bet: ";
+            std::cout << "Enter your bet: "; // TODO: Add checks for better valid input
             if (std::cin >> bet && bet > 0 && bet <= balance) {
                 bet = roundToTwoDecimals(bet);
                 balance -= bet; //good bet value
@@ -411,12 +399,12 @@ int main() {
             calculateCardPositions(dealerCards, dealerRow, cols);
             calculateCardPositions(playerCards, playerRow, cols);
 
-            if (playerTotal.second == 21) { //if insta blackjack
+            if (playerTotal.second == 21) { //if blackjack
                 displayTable(selectedButton, dealerCards, playerCards, balance, bet);
                 std::cout << std::flush;
                 sleep(1);
                 std::cout << "\033[32mBLACKJACK! You win!!!\033[0m" << std::flush;
-                balance += roundToTwoDecimals(bet * 1.5);
+                balance += roundToTwoDecimals(bet * 2.5);
                 sleep(2);
                 break;
             }
